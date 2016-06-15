@@ -24,18 +24,27 @@
 //   return dieCount;
 // }
 
-debugger;
+// debugger;
+var tempScore = 0;
+
+var throwdice = function () {
+  var roll = Math.floor(6*Math.random()) + 1;
+  if (roll === 1) {
+    tempScore = 0;
+  } else {
+    tempScore += roll;
+  }
+  return roll;
+}
+
+
 $(document).ready(function() {
-  $("button#player1-roll").submit(function(event){
+  $("button#player1-roll").click(function(event){
     event.preventDefault();
 
-    var rollDice = throwdice();
+    var result = throwdice();
 
-    var throwdice = function () {
-      var roll = Math.floor( Math.random() * 6) + 1;
-      return roll;
-    }
-
-    $("#die-roll-1").text(rollDice);
+    $("#die-roll-1").text(result);
+    $("#round-total-1").text(tempScore);
 });
 });
