@@ -1,13 +1,12 @@
 //business logic
-// var diceRoll = 0;
-// var roundTotal = 0;
-// var totalScore = 0;
-//
-// function PlayerInfo (name, diceRoll, roundTotal, totalScore) {
+
+var tempScore = 0;
+var totalScore = 0;
+var roll = 0;
+
+// function player(name, score) {
 //   this.playerName = name;
-//   this.playerDiceRoll = diceRoll;
-//   this.playerRoundTotal = roundTotal;
-//   this.playerTotalScore = totalScore;
+//   this.gameScore = score;
 // }
 
 // PlayerInfo.prototype.roundScore = function () {
@@ -17,17 +16,7 @@
 // PlayerInfo.prototype.totalScore = function () {
 //   totalScore += this.playerRoundTotal
 // }
-//user Logic
-//
-// var dieRoll = function () {
-//   var dieCount = Math.floor( Math.random() * 6) + 1;
-//   return dieCount;
-// }
 
-// debugger;
-var tempScore = 0;
-var totalScore = 0;
-var roll = 0;
 
 var throwdice = function () {
   roll = Math.floor(6*Math.random()) + 1;
@@ -44,11 +33,17 @@ var runningScore = function () {
   return totalScore;
 }
 
-
-
-
-
 $(document).ready(function() {
+  $("button#start").click(function(event){
+    $(".player-console").show();
+
+
+  })
+
+
+
+
+
   $("button#player1-roll").click(function(event){
     event.preventDefault();
 
@@ -65,5 +60,22 @@ $(document).ready(function() {
     $("#die-roll-1").empty();
 
 });
+
+  $("button#player2-roll").click(function(event){
+    event.preventDefault();
+
+    var result = throwdice();
+
+    $("#die-roll-2").text(result);
+    $("#round-total-2").text(tempScore);
+  });
+
+  $("button#player2-hold").click(function(event){
+    $("#total-score-2").text(runningScore);
+    tempScore = 0;
+    $("#round-total-2").empty();
+    $("#die-roll-2").empty();
+
+  });
 
 });
