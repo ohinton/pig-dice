@@ -26,9 +26,11 @@
 
 // debugger;
 var tempScore = 0;
+var totalScore = 0;
+var roll = 0;
 
 var throwdice = function () {
-  var roll = Math.floor(6*Math.random()) + 1;
+  roll = Math.floor(6*Math.random()) + 1;
   if (roll === 1) {
     tempScore = 0;
   } else {
@@ -36,6 +38,14 @@ var throwdice = function () {
   }
   return roll;
 }
+
+var runningScore = function () {
+  totalScore += tempScore;
+  return totalScore;
+}
+
+
+
 
 
 $(document).ready(function() {
@@ -46,5 +56,14 @@ $(document).ready(function() {
 
     $("#die-roll-1").text(result);
     $("#round-total-1").text(tempScore);
+  });
+
+  $("button#player1-hold").click(function(event){
+    $("#total-score-1").text(runningScore);
+    tempScore = 0;
+    $("#round-total-1").empty();
+    $("#die-roll-1").empty();
+
 });
+
 });
