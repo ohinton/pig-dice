@@ -36,8 +36,12 @@ var runningScore = function () {
 $(document).ready(function() {
   $("button#start").click(function(event){
     $(".player-console").show();
+    $(".start-menu").hide();
+  })
 
-
+  $("button#new-game").click(function(event){
+    $(".player-console").hide();
+    $(".start-menu").show();
   })
 
 
