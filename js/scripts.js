@@ -1,7 +1,8 @@
 //business logic
 
 var tempScore = 0;
-var totalScore = 0;
+var totalScore1 = 0;
+var totalScore2 = 0;
 var roll = 0;
 
 // function player(name, score) {
@@ -28,9 +29,25 @@ var throwdice = function () {
   return roll;
 }
 
-var runningScore = function () {
-  totalScore += tempScore;
-  return totalScore;
+var runningScore1 = function () {
+  totalScore1 += tempScore;
+
+  if (totalScore1 >= 100) {
+    alert("You win!")
+  }
+
+  return totalScore1;
+
+}
+
+var runningScore2 = function () {
+  totalScore2 += tempScore;
+
+  if (totalScore2 >= 100) {
+    alert("You win!")
+  }
+
+  return totalScore2;
 }
 
 $(document).ready(function() {
@@ -62,7 +79,7 @@ $(document).ready(function() {
   });
 
   $("button#player1-hold").click(function(event){
-    $("#total-score-1").text(runningScore);
+    $("#total-score-1").text(runningScore1);
     tempScore = 0;
     $("#round-total-1").empty();
     $("#die-roll-1").empty();
@@ -79,7 +96,7 @@ $(document).ready(function() {
   });
 
   $("button#player2-hold").click(function(event){
-    $("#total-score-2").text(runningScore);
+    $("#total-score-2").text(runningScore2);
     tempScore = 0;
     $("#round-total-2").empty();
     $("#die-roll-2").empty();
