@@ -1,10 +1,6 @@
 //business logic
 var player1 = new Player(true);
 var player2 = new Player(false);
-// var tempScore = 0;
-// var totalScore1 = 0;
-// var totalScore2 = 0;
-// var roll = 0;
 
 var throwdice = function () {
   return Math.floor(6*Math.random())+1;
@@ -21,10 +17,11 @@ function Player(turn) {
 Player.prototype.rollone = function() {
   if (this.roll === 1) {
   this.tempscore = 0;
+  alert("Sorry, you rolled a 1! Your turn is over!")
   this.changeturn();
-} else {
+  } else {
   this.tempscore += this.roll;
-}
+  }
 }
 
 // hold
@@ -32,6 +29,7 @@ Player.prototype.hold = function () {
   this.totalscore += this.tempscore;
   this.tempscore = 0;
   this.changeturn();
+  alert("Your turn is over, pass the mouse!")
 }
 
 // changing turn
@@ -43,24 +41,11 @@ Player.prototype.changeturn = function () {
   }
 }
 // check for 100
-// var runningScore1 = function () {
-//   totalScore1 += tempScore;
-//
-//   if (totalScore1 >= 100) {
-//     alert("You win!")
-//   }
-//   return totalScore1;
-// }
-//
-// var runningScore2 = function () {
-//   totalScore2 += tempScore;
-//
-//   if (totalScore2 >= 100) {
-//     alert("You win!")
-//   }
-//
-//   return totalScore2;
-// }
+Player.prototype.winnerCheck = function () {
+  if (this.totalscore >= 100) {
+    alert("You are the winner!");
+  }
+}
 
 // User Interface
 $(document).ready(function() {
@@ -99,6 +84,7 @@ $(document).ready(function() {
     $("#total-score-1").text(player1.totalscore);
     $("#round-total-1").empty();
     $("#die-roll-1").empty();
+    player1.winnerCheck();
   });
 
   $("button#player2-hold").click(function(event){
@@ -106,6 +92,6 @@ $(document).ready(function() {
     $("#total-score-2").text(player2.totalscore);
     $("#round-total-2").empty();
     $("#die-roll-2").empty();
+    player2.winnerCheck();
   });
-
 });
