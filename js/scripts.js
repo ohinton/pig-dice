@@ -19,7 +19,7 @@ Player.prototype.rollone = function() {
   if (this.roll === 1) {
   this.tempscore = 0;
   alert("Sorry " + this.playerName + ", you rolled a 1! Your turn is over!")
-  this.changeturn();
+  // this.changeturn();
   } else {
   this.tempscore += this.roll;
   }
@@ -29,18 +29,18 @@ Player.prototype.rollone = function() {
 Player.prototype.hold = function () {
   this.totalscore += this.tempscore;
   this.tempscore = 0;
-  this.changeturn();
+  // this.changeturn();
   alert(this.playerName + ", your turn is over, pass the mouse!");
 }
 
-// changing turn
-Player.prototype.changeturn = function () {
-  if (this.turn === true) {
-    this.turn = false;
-  } else {
-    this.turn = true;
-  }
-}
+// // changing turn
+// Player.prototype.changeturn = function () {
+//   if (this.roll ===1) {
+//     this.turn = false;
+//   } else {
+//     this.turn = true;
+//   }
+// }
 // check for 100
 Player.prototype.winnerCheck = function () {
   if (this.totalscore >= 100) {
