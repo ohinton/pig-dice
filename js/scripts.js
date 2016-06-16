@@ -1,6 +1,6 @@
 //business logic
-var player1 = new Player(true);
-var player2 = new Player(false);
+var player1="";
+var player2="";
 
 var throwdice = function () {
   return Math.floor(6*Math.random())+1;
@@ -11,13 +11,14 @@ function Player(turn) {
   this.tempscore = 0;
   this.totalscore = 0;
   this.turn = turn;
+  this.playerName;
 }
 
 // checking for 1
 Player.prototype.rollone = function() {
   if (this.roll === 1) {
   this.tempscore = 0;
-  alert("Sorry, you rolled a 1! Your turn is over!")
+  alert("Sorry " + this.playerName + ", you rolled a 1! Your turn is over!")
   this.changeturn();
   } else {
   this.tempscore += this.roll;
@@ -29,7 +30,7 @@ Player.prototype.hold = function () {
   this.totalscore += this.tempscore;
   this.tempscore = 0;
   this.changeturn();
-  alert("Your turn is over, pass the mouse!")
+  alert(this.playerName + ", your turn is over, pass the mouse!");
 }
 
 // changing turn
@@ -43,13 +44,29 @@ Player.prototype.changeturn = function () {
 // check for 100
 Player.prototype.winnerCheck = function () {
   if (this.totalscore >= 100) {
-    alert("You are the winner!");
+    alert(this.playerName + " You are the winner!");
   }
+}
+
+Player.prototype.newGame = function () {
+  //debugger;
+  this.roll = 0;
+  this.tempscore = 0;
+  this.totalscore = 0;
+  this.playerName ="";
+}
+
+var clearValues = function(){
+  $(".player1Name").val("");
+  $(".player2Name").val("");
 }
 
 // User Interface
 $(document).ready(function() {
+
   $("button#start").click(function(event){
+    player1 = new Player(true);
+    player2 =  new Player(false);
     $(".player-console").show();
     $(".start-menu").hide();
 
@@ -58,10 +75,23 @@ $(document).ready(function() {
 
     var player2Name = $(".player2Name").val();
     $("#player2Name").text(player2Name);
-  });
 
+    player1.playerName=player1Name;
+    player2.playerName=player2Name;
+
+  });
   $("button#new-game").click(function(event){
     $(".player-console").hide();
+    clearValues();
+    player1.newGame();
+    player2.newGame();
+    $("#round-total-1").empty();
+    $("#total-score-1").empty();
+    $("#die-roll-1").empty();
+    $("#round-total-2").empty();
+    $("#total-score-2").empty();
+    $("#die-roll-2").empty();
+
     $(".start-menu").show();
   });
 
@@ -94,4 +124,5 @@ $(document).ready(function() {
     $("#die-roll-2").empty();
     player2.winnerCheck();
   });
+
 });
